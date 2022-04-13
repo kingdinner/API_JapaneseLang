@@ -16,7 +16,8 @@ exports.signup = (req, res) => {
     address: req.body.address,
     dateofbirth:req.body.dateofbirth,
     gender: req.body.gender,
-    contactnumber: req.body.contactnumber
+    contactnumber: req.body.contactnumber,
+    accounttype: req.body.accounttype
   })
     .then(user => {
       if (req.body.roles) {
@@ -45,6 +46,7 @@ exports.signup = (req, res) => {
     });
 };
 exports.signin = (req, res) => {
+  // console.log(req.body.username)
   User.findOne({
     where: {
       username: req.body.username
@@ -77,7 +79,8 @@ exports.signin = (req, res) => {
           username: user.username,
           email: user.email,
           roles: authorities,
-          accessToken: token
+          accessToken: token,
+          accountType: user.accounttype
         });
       });
     })
@@ -85,3 +88,7 @@ exports.signin = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
+
+const editAccountBasedTransactionType = (req, res) => {
+  
+}

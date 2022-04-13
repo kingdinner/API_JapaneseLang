@@ -13,11 +13,13 @@ const recentMembers = (req, res) => {
 
 const listUserBasedTransaction = (req, res) => {
     User.findAll({
-        where: {
-            type: req.body.usertype
-        }
+      where: {
+        accounttype: req.body.accounttype
+      }
     })
-    .then(users => res.status(200).send(users))
+    .then(userlistaccounts => {
+          res.status(200).send({userlistaccounts});
+    })
     .catch((error) => {
       console.log(error.toString());
       res.status(400).send(error)

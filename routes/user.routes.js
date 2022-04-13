@@ -30,13 +30,13 @@ module.exports = function(app) {
 
   app.get(
     "/api/admin/recentMembers",
-    // [authJwt.verifyToken, allAccess
+    [authJwt.verifyToken, authJwt.isAdmin || authJwt.isModerator],
     functionController.recentMembers
   );
 
   app.post(
     "/api/admin/listUserBasedTransaction",
-    // [authJwt.verifyToken, allAccess
+    [authJwt.verifyToken, authJwt.isAdmin],
     functionController.listUserBasedTransaction
   );
 };
