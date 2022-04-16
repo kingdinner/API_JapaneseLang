@@ -2,6 +2,7 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
+const userStatus = db.userStatus
 const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
@@ -17,7 +18,8 @@ exports.signup = (req, res) => {
     dateofbirth:req.body.dateofbirth,
     gender: req.body.gender,
     contactnumber: req.body.contactnumber,
-    accounttype: req.body.accounttype
+    accounttype: req.body.accounttype,
+    status: 0
   })
     .then(user => {
       if (req.body.roles) {

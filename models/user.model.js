@@ -1,5 +1,8 @@
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("users", {
+      UserID: {
+        type: Sequelize.STRING
+      },
       username: {
         type: Sequelize.STRING
       },
@@ -28,6 +31,18 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       },
       accounttype: {
+        type: Sequelize.STRING
+      },
+      SNSAccount: {
+        type:Sequelize.STRING
+      },
+      joiningDate: {
+        type:Sequelize.STRING
+      },
+      group: {
+        type:Sequelize.STRING
+      },
+      status: {
         type: Sequelize.STRING
       }
     });
