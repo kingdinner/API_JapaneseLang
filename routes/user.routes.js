@@ -1,6 +1,7 @@
 const { authJwt } = require("../middleware");
 const controller = require("../controllers/user.controllers");
 const functionController = require("../controllers/admin/dashboard.controllers");
+const studentController = require("../controllers/student/student.controllers");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -10,6 +11,11 @@ module.exports = function(app) {
     );
     next();
   });
+
+  app.post(
+    "/api/admin/editStudentPersonalInformation",
+    studentController.editStudentPersonalInformation
+  )
 
   app.get(
     "/api/admin/recentMembers",
