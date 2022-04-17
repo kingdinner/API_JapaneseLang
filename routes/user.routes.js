@@ -13,8 +13,28 @@ module.exports = function(app) {
   });
 
   app.post(
-    "/api/admin/editStudentPersonalInformation",
+    "/api/student/editStudentPersonalInformation",
     studentController.editStudentPersonalInformation
+  )
+
+  app.post(
+    "/api/student/editStudentEducation",
+    studentController.editStudentEducation
+  )
+
+  app.post(
+    "/api/student/editWorkExprience",
+    studentController.editWorkExprience
+  )
+
+  app.post(
+    "/api/student/editSkills",
+    studentController.editSkills
+  )
+
+  app.post(
+    "/api/student/editHobby",
+    studentController.editHobby
   )
 
   app.get(

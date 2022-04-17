@@ -1,6 +1,8 @@
 const db = require("../../models");
 const personalInformation = db.personalInformation;
 const StudentEducation = db.userEducation;
+const WorkExprience = db.userWorkExperience;
+const skillsHobby = db.skills
 
 const editStudentPersonalInformation = async (req, res) => {
     const existAccountID = await personalInformation.findOne({where: { studentID: req.body.studentid } })
@@ -98,8 +100,105 @@ const editStudentEducation = async (req, res) => {
     }
 }
 
+const editWorkExprience = async (req, res) => {
+    const existAccountID = await WorkExprience.findOne({where: { studentID: req.body.studentid } })
+    if (!existAccountID) {
+        WorkExprience.create({
+            studentID: req.body.studentid,
+            school: req.body.school,
+            level: req.body.level,
+            year: req.body.year
+        })
+        .then(user => {
+            res.status(200).send({
+                school: user.school,
+                level: user.level,
+                year: user.year
+            })
+        })        
+    } else {
+        WorkExprience.update({ 
+            school: req.body.school,
+            level: req.body.level,
+            year: req.body.year
+        }, {
+            where: {
+                studentID: req.body.studentid
+            }
+        })
+        .then(user => {
+            res.status(200).send({
+                school: user.school,
+                level: user.level,
+                year: user.year
+            })
+        });
+    }
+}
+
+
+const editSkills = async (req, res) => {
+    const existAccountID = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+    if (!existAccountID) {
+        skillsHobby.create({
+            skills: req.body.skills,
+            specialty: req.body.specialty
+        })
+        .then(user => {
+            res.status(200).send({
+                skills: user.skills,
+                specialty: user.specialty
+            })
+        })        
+    } else {
+        skillsHobby.update({ 
+            skills: req.body.skills,
+            specialty: req.body.specialty
+        }, {
+            where: {
+                studentID: req.body.studentid
+            }
+        })
+        .then(user => {
+            res.status(200).send({
+                skills: user.skills,
+                specialty: user.specialty
+            })
+        });
+    }
+}
+
+const editHobby = async (req, res) => {
+    const existAccountID = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+    if (!existAccountID) {
+        skillsHobby.create({
+            hobby: req.body.hobby
+        })
+        .then(user => {
+            res.status(200).send({
+                hobby: user.hobby
+            })
+        })        
+    } else {
+        skillsHobby.update({ 
+            hobby: req.body.hobby
+        }, {
+            where: {
+                studentID: req.body.studentid
+            }
+        })
+        .then(user => {
+            res.status(200).send({
+                hobby: user.hobby
+            })
+        });
+    }
+}
 
 module.exports = {
     editStudentPersonalInformation,
-    editStudentEducation
+    editStudentEducation,
+    editWorkExprience,
+    editSkills,
+    editHobby
 }
