@@ -1,6 +1,6 @@
 module.exports = (sequelize, Sequelize) => {
     const User = sequelize.define("users", {
-      UserID: {
+      userid: {
         type: Sequelize.STRING
       },
       username: {
@@ -42,7 +42,10 @@ module.exports = (sequelize, Sequelize) => {
       group: {
         type:Sequelize.STRING
       },
-      status: {
+      statusaccount: {
+        type: Sequelize.STRING
+      },
+      level:{
         type: Sequelize.STRING
       }
     });

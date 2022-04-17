@@ -6,9 +6,16 @@ const userStatus = db.userStatus
 const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
-exports.signup = (req, res) => {
+
+const latestIDStudent = async (req, res) => {
+  return User.findAll({order: [['createdAt', 'DESC']]})
+}
+
+exports.signup = async (req, res) => {
   // Save User to Database
+  const numberStudent = await latestIDStudent()
   User.create({
+    userid: `CC${!numberStudent.id ? 1 : parseInt(numberStudent.id) + 1}`,
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),

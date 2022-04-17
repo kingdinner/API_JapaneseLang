@@ -13,5 +13,5 @@ module.exports = (sequelize, Sequelize) => {
         type: Sequelize.STRING
       }
     });
-    return workExperience;
+    return skills;
   };

@@ -26,6 +26,10 @@ const listUserBasedTransaction = (req, res) => {
     });
 }
 
+const editStudent = (req, res) => {
+    
+}
+
 module.exports = {
     recentMembers,
     listUserBasedTransaction
