@@ -2,20 +2,19 @@ const db = require("../models");
 const config = require("../config/auth.config");
 const User = db.user;
 const Role = db.role;
-const userStatus = db.userStatus
 const Op = db.Sequelize.Op;
 var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 const latestIDStudent = async (req, res) => {
-  return User.findAll({order: [['createdAt', 'DESC']]})
+  return User.findOne({order: [['createdAt', 'DESC']]})
 }
 
 exports.signup = async (req, res) => {
   // Save User to Database
   const numberStudent = await latestIDStudent()
   User.create({
-    userid: `CC${!numberStudent.id ? 1 : parseInt(numberStudent.id) + 1}`,
+    userid: `CC${numberStudent.id == 0 ? 1 : parseInt(numberStudent.id) + 1}`,
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
@@ -25,8 +24,8 @@ exports.signup = async (req, res) => {
     dateofbirth:req.body.dateofbirth,
     gender: req.body.gender,
     contactnumber: req.body.contactnumber,
-    accounttype: req.body.accounttype,
-    status: 0
+    accounttype: req.body.roles[0],
+    statusaccount: 0
   })
     .then(user => {
       if (req.body.roles) {
