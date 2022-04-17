@@ -1,5 +1,6 @@
 const db = require("../../models");
 const personalInformation = db.personalInformation;
+const StudentEducation = db.userEducation;
 
 const editStudentPersonalInformation = async (req, res) => {
     const existAccountID = await personalInformation.findOne({where: { studentID: req.body.studentid } })
@@ -61,7 +62,44 @@ const editStudentPersonalInformation = async (req, res) => {
     }
 }
 
+const editStudentEducation = async (req, res) => {
+    const existAccountID = await StudentEducation.findOne({where: { studentID: req.body.studentid } })
+    if (!existAccountID) {
+        StudentEducation.create({
+            studentID: req.body.studentid,
+            school: req.body.school,
+            level: req.body.level,
+            year: req.body.year
+        })
+        .then(user => {
+            res.status(200).send({
+                school: user.school,
+                level: user.level,
+                year: user.year
+            })
+        })        
+    } else {
+        StudentEducation.update({ 
+            school: req.body.school,
+            level: req.body.level,
+            year: req.body.year
+        }, {
+            where: {
+                studentID: req.body.studentid
+            }
+        })
+        .then(user => {
+            res.status(200).send({
+                school: user.school,
+                level: user.level,
+                year: user.year
+            })
+        });
+    }
+}
+
 
 module.exports = {
-    editStudentPersonalInformation
+    editStudentPersonalInformation,
+    editStudentEducation
 }
