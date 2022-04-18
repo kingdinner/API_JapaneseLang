@@ -4,14 +4,18 @@ const app = express();
 var corsOptions = {
   origin: "http://localhost:8081"
 };
+const multer  = require('multer');
+const upload = multer();
+app.use(upload.array());
+
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
 app.use(express.json());
 // parse requests of content-type - application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));
 // simple route
-const db = require("./models");
-const Role = db.role;
+// const db = require("./models");
+// const Role = db.role;
 // db.sequelize.sync({force: true}).then(() => {
 //   console.log('Drop and Resync Db');
 //   initial();

@@ -1,6 +1,6 @@
 const db = require("../../models");
 const User = db.user;
-const Role = db.role;
+const task = db.task;
 
 const recentMembers = (req, res) => {
     User.findAll({order: [['createdAt', 'DESC']]})
@@ -26,9 +26,11 @@ const listUserBasedTransaction = (req, res) => {
     });
 }
 
-const editStudent = (req, res) => {
-    
-}
+// const addTask = async( req, res ) => {
+//   task.create({
+
+//   })
+// }
 
 module.exports = {
     recentMembers,

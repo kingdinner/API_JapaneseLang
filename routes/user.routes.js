@@ -17,15 +17,15 @@ module.exports = function(app) {
     studentController.editStudentPersonalInformation
   )
 
-  app.post(
-    "/api/common/uploadFile",
-    studentController.uploadFile
-  )
+  // app.post(
+  //   "/api/common/uploadFile",
+  //   studentController.uploadFile
+  // )
 
-  app.post(
-    "/api/common/deleteFile",
-    studentController.deleteFile
-  )
+  // app.post(
+  //   "/api/common/deleteFile",
+  //   studentController.deleteFile
+  // )
 
 
   app.post(
