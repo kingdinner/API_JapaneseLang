@@ -62,6 +62,11 @@ module.exports = function(app) {
     studentController.editHobby
   )
 
+  app.get(
+    "/api/student/displayGrade",
+    studentController.displayGrade
+  )
+
   //-----------------------------------
 
   // task
@@ -99,5 +104,14 @@ module.exports = function(app) {
     "/api/admin/listUserBasedTransaction",
     functionController.listUserBasedTransaction
   );
-  
+
+  app.post(
+    "/api/admin/editEmployees",
+    functionController.editEmployees
+  );
+
+  app.post(
+    "/api/admin/activedAccount",
+    functionController.activedAccount
+  );
 };

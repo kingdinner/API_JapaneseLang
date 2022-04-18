@@ -12,6 +12,40 @@ const recentMembers = (req, res) => {
     });
 }
 
+const editEmployees = async (req, res) => {
+  User.update({
+    username: req.body.username,
+    email: req.body.email,
+    password: bcrypt.hashSync(req.body.password, 8),
+    lastname: req.body.lastname,
+    firstname: req.body.firstname,
+    address: req.body.address,
+    contactnumber: req.body.contactnumber
+  }, {
+    where: {
+      userid: req.body.userid,
+    }
+  })
+  .then(async() => {    
+    const displayUpdate = await User.findOne({where: { userid: req.body.userid } })
+    res.send(displayUpdate)
+  })
+}
+
+const activedAccount = async (req, res) => {
+  User.update({
+    statusaccount: 1
+  }, {
+    where: {
+      userid: req.body.userid,
+    }
+  })
+  .then(async() => {    
+    const displayUpdate = await User.findOne({where: { userid: req.body.userid } })
+    res.send(displayUpdate)
+  })
+}
+
 const listUserBasedTransaction = (req, res) => {
     User.findAll({
       where: {
@@ -80,5 +114,7 @@ module.exports = {
     displayTask,
     remainder,
     addGrade,
-    oneStudentGrade
+    oneStudentGrade,
+    editEmployees,
+    activedAccount
 }

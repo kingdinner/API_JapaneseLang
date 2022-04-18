@@ -3,6 +3,7 @@ const personalInformation = db.personalInformation;
 const StudentEducation = db.userEducation;
 const WorkExprience = db.userWorkExperience;
 const skillsHobby = db.skills
+const grade = db.grade
 
 const editStudentPersonalInformation = async (req, res) => {
     const existAccountID = await personalInformation.findOne({where: { studentID: req.body.studentid } })
@@ -166,10 +167,20 @@ const editHobby = async (req, res) => {
     }
 }
 
+const displayGrade = async (req, res) => {
+    const grades = await grade.findAll({
+        where :{
+            studentid: req.body.studentid
+        }
+    })
+    res.send(grades)
+}
+
 module.exports = {
     editStudentPersonalInformation,
     editStudentEducation,
     editWorkExprience,
     editSkills,
-    editHobby
+    editHobby,
+    displayGrade
 }

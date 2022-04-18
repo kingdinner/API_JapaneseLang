@@ -89,7 +89,3 @@ exports.signin = (req, res) => {
       res.status(500).send({ message: err.message });
     });
 };
-
-const editAccountBasedTransactionType = (req, res) => {
-  
-}
