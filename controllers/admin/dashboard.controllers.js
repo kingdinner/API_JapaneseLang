@@ -1,6 +1,7 @@
 const db = require("../../models");
 const User = db.user;
 const task = db.task;
+const grades = db.grade;
 
 const recentMembers = (req, res) => {
     User.findAll({order: [['createdAt', 'DESC']]})
@@ -26,13 +27,57 @@ const listUserBasedTransaction = (req, res) => {
     });
 }
 
-// const addTask = async( req, res ) => {
-//   task.create({
+const addTask = async( req, res ) => {
+  const task = await task.create({
+    studentid: req.body.studentid,
+    taskname: req.body.taskname,
+    details: req.body.details,
+    date: req.body.date,
+    deadline: req.body.deadline
+  })
+  res.send(task)
+}
 
-//   })
-// }
+const displayTask = async( req, res ) => {
+  const task = await task.findAll()
+  res.send(task)
+}
+
+const remainder = async( req, res ) => {
+  const remainder = await task.findAll({
+    where: {
+      studentid: req.body.studentid
+    }
+  })
+  res.send(remainder)
+}
+
+const addGrade = async (req, res) => {
+  const grade = await grades.create({
+    studentid: req.body.studentid,
+    subject: req.body.subject,
+    grade: req.body.grade,
+    status: req.body.status,
+    date: req.body.date
+  })
+  res.send(grade)
+}
+
+const oneStudentGrade = async (req, res) => {
+  const studentGrade = await grades.findAll({
+    where: {
+      studentid: req.body.studentid
+    }
+  })
+  res.send(studentGrade)
+}
 
 module.exports = {
     recentMembers,
-    listUserBasedTransaction
+    listUserBasedTransaction,
+    addTask,
+    displayTask,
+    remainder,
+    addGrade,
+    oneStudentGrade
 }

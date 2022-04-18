@@ -11,6 +11,9 @@ module.exports = (sequelize, Sequelize) => {
       },
       date: {
         type: Sequelize.STRING
+      },
+      deadline: {
+        type: Sequelize.STRING
       }
     });
     return task;

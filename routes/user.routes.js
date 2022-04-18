@@ -64,6 +64,32 @@ module.exports = function(app) {
 
   //-----------------------------------
 
+  // task
+
+  app.get(
+    "/api/admin/displayTask",
+    functionController.displayTask
+  );
+
+  app.post(
+    "/api/admin/addTask",
+    functionController.addTask
+  );
+
+  app.get(
+    "/api/admin/displayTask",
+    functionController.remainder
+  );
+  
+  // ----------------------------------
+  // Grade
+
+  app.post(
+    "/api/admin/addGrade",
+    functionController.addGrade
+  );
+
+  //------------------------------------
   app.get(
     "/api/admin/recentMembers",
     [authJwt.verifyToken],
@@ -75,4 +101,5 @@ module.exports = function(app) {
     [authJwt.verifyToken],
     functionController.listUserBasedTransaction
   );
+  
 };

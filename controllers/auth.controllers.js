@@ -29,30 +29,14 @@ exports.signup = async (req, res) => {
     dateofbirth:req.body.dateofbirth,
     gender: req.body.gender,
     contactnumber: req.body.contactnumber,
-    accounttype: req.body.roles[0],
+    accounttype: req.body.roles,
     statusaccount: 0
   })
     .then(user => {
-      if (req.body.roles) {
-        // can be remove if deploy for production base for the client request 
-        Role.findAll({
-          where: {
-            name: {
-              [Op.or]: req.body.roles
-            }
-          }
-        }).then(roles => {
-          user.setRoles(roles).then(() => {
-            res.send({ user });
-          });
-        });
-        // ------------
-      } else {
         // user role = 1
-        user.setRoles([1]).then(() => {
-          res.send({ message: user });
-        });
-      }
+      user.setRoles([1]).then(() => {
+        res.send({ message: user });
+      });
     })
     .catch(err => {
       res.status(500).send({ message: err.message });
@@ -69,6 +53,11 @@ exports.signin = (req, res) => {
       if (!user) {
         return res.status(404).send({ message: "User Not found." });
       }
+
+      if (user.statusaccount === 0) {
+        return res.status(404).send({ message: "User is not activated" });
+      }
+
       var passwordIsValid = bcrypt.compareSync(
         req.body.password,
         user.password
