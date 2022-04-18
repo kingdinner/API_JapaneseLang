@@ -12,7 +12,7 @@ const storage = multer.diskStorage({
 
 var upload = multer({ storage: storage });
 
-const uploadFiles = async (req, res, next) => {
+const uploadFile = (req, res, next) => {
     const file = req.file
     if (!file) {
         return res.status(400).send({ message: 'Please upload a file.' });
@@ -32,6 +32,15 @@ const uploadFiles = async (req, res, next) => {
     });
 }
 
+const deleteFile = async(req, res) => {
+    await resources.destroy({
+        where: {
+            id: req.body.id
+        }
+    })
+}
+
 module.exports = {
-    uploadFiles
+    uploadFiles,
+    deleteFile
 }
