@@ -2,7 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080",
+  optionsSuccessStatus: 200, // For legacy browser support
+  methods: "GET, PUT"
 };
 const multer  = require('multer');
 const path = require('path');
