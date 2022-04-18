@@ -22,7 +22,6 @@ db.sequelize = sequelize;
 db.user = require("../models/user.model.js")(sequelize, Sequelize);
 db.role = require("../models/role.model.js")(sequelize, Sequelize);
 db.personalInformation = require("./personalinformation.model.js")(sequelize, Sequelize);
-db.assignment = require("../models/assignment.model.js")(sequelize, Sequelize);
 db.grade = require("../models/grade.model.js")(sequelize, Sequelize);
 db.resources = require("../models/resources.model.js")(sequelize, Sequelize);
 db.skills = require("../models/skills.model.js")(sequelize, Sequelize);
