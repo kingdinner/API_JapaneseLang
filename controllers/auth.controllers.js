@@ -7,14 +7,19 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 const latestIDStudent = async (req, res) => {
-  return User.findOne({order: [['createdAt', 'DESC']]})
+ const existing = await User.findOne({order: [['createdAt', 'DESC']]})
+ if (!existing) {
+   return 0
+ }
+ return existing
 }
 
 exports.signup = async (req, res) => {
   // Save User to Database
   const numberStudent = await latestIDStudent()
+  console.log(numberStudent.id)
   User.create({
-    userid: `CC${numberStudent.id == 0 ? 1 : parseInt(numberStudent.id) + 1}`,
+    userid: `CC${numberStudent.id == undefined ? 1 : parseInt(numberStudent.id) + 1}`,
     username: req.body.username,
     email: req.body.email,
     password: bcrypt.hashSync(req.body.password, 8),
@@ -38,14 +43,14 @@ exports.signup = async (req, res) => {
           }
         }).then(roles => {
           user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
+            res.send({ user });
           });
         });
         // ------------
       } else {
         // user role = 1
         user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
+          res.send({ message: user });
         });
       }
     })
