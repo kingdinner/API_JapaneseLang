@@ -5,8 +5,19 @@ var corsOptions = {
   origin: "http://localhost:8081"
 };
 const multer  = require('multer');
-const upload = multer();
-app.use(upload.array());
+const path = require('path');
+
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+     cb(null, 'uploads');
+  },
+  filename: function (req, file, cb) {
+     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+  }
+});
+const upload = multer({ storage: storage });
+
+app.use(upload.any());
 
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json

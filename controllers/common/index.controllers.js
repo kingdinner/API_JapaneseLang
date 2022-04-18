@@ -1,16 +1,18 @@
 const db = require("../../models");
+const multer = require('multer')
 const resources = db.resources
 
 const uploadFile = (req, res, next) => {
-    const file = req.file
+    console.log(req.files[0].filename);
+    const file = req.files
     if (!file) {
         return res.status(400).send({ message: 'Please upload a file.' });
     }
-    resources.Create({
+    resources.create({
         userID: req.body.userID,
         taskID: req.body.taskID,
-        uploaded: req.body.uploaded,
-        filename: req.body.filename,
+        uploaded: Date.now(),
+        filename: req.files[0].filename,
         level: req.body.level,
         type: req.body.type
     })
