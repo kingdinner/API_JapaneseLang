@@ -2,6 +2,7 @@ const { authJwt } = require("../middleware");
 const controller = require("../controllers/user.controllers");
 const functionController = require("../controllers/admin/dashboard.controllers");
 const studentController = require("../controllers/student/student.controllers");
+const commonController = require("../controllers/common/index.controllers");
 
 module.exports = function(app) {
   app.use(function(req, res, next) {
@@ -17,15 +18,15 @@ module.exports = function(app) {
     studentController.editStudentPersonalInformation
   )
 
-  // app.post(
-  //   "/api/common/uploadFile",
-  //   studentController.uploadFile
-  // )
+  app.post(
+    "/api/common/uploadFile",
+    commonController.uploadFile
+  )
 
-  // app.post(
-  //   "/api/common/deleteFile",
-  //   studentController.deleteFile
-  // )
+  app.post(
+    "/api/common/deleteFile",
+    commonController.deleteFile
+  )
 
 
   app.post(

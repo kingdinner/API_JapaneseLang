@@ -1,3 +1,4 @@
+const db = require("../../models");
 const resources = db.resources
 
 const uploadFile = (req, res, next) => {
@@ -29,6 +30,6 @@ const deleteFile = async(req, res) => {
 }
 
 module.exports = {
-    uploadFiles,
+    uploadFile,
     deleteFile
 }
