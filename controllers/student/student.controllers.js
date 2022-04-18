@@ -20,17 +20,7 @@ const editStudentPersonalInformation = async (req, res) => {
             EmergencyPhoneSecondary: req.body.EmergencyPhoneSecondary
         })
         .then(user => {
-            res.status(200).send({
-                Nationality: user.Nationality,
-                Religion: user.Religion,
-                maritalStatus: user.maritalStatus,
-                EmergencyPersonNamePrimary: user.EmergencyPersonNamePrimary,
-                EmergencyRelationsShipsPrimary: user.EmergencyRelationsShipsPrimary,
-                EmergencyPhonePrimary: user.EmergencyPhonePrimary,
-                EmergencyPersonNameSecondary: user.EmergencyPersonNameSecondary,
-                EmergencyRelationsShipsSecondary: user.EmergencyRelationsShipsSecondary,
-                EmergencyPhoneSecondary: user.EmergencyPhoneSecondary
-            })
+            res.status(200).send(user)
         })        
     } else {
         personalInformation.update({ 
@@ -45,22 +35,12 @@ const editStudentPersonalInformation = async (req, res) => {
             EmergencyPhoneSecondary: req.body.EmergencyPhoneSecondary
         }, {
             where: {
-                studentID: req.body.studentid
+                studentID: req.body.studentid,
             }
+        }).then(async() => {    
+            const displayUpdate = await personalInformation.findOne({where: { studentID: req.body.studentid } })
+            res.send(displayUpdate)
         })
-        .then(user => {
-            res.status(200).send({
-                Nationality: user.Nationality,
-                Religion: user.Religion,
-                maritalStatus: user.maritalStatus,
-                EmergencyPersonNamePrimary: user.EmergencyPersonNamePrimary,
-                EmergencyRelationsShipsPrimary: user.EmergencyRelationsShipsPrimary,
-                EmergencyPhonePrimary: user.EmergencyPhonePrimary,
-                EmergencyPersonNameSecondary: user.EmergencyPersonNameSecondary,
-                EmergencyRelationsShipsSecondary: user.EmergencyRelationsShipsSecondary,
-                EmergencyPhoneSecondary: user.EmergencyPhoneSecondary
-            })
-        });
     }
 }
 
@@ -90,13 +70,10 @@ const editStudentEducation = async (req, res) => {
                 studentID: req.body.studentid
             }
         })
-        .then(user => {
-            res.status(200).send({
-                school: user.school,
-                level: user.level,
-                year: user.year
-            })
-        });
+        .then(async() => {    
+            const displayUpdate = await StudentEducation.findOne({where: { studentID: req.body.studentid } })
+            res.send(displayUpdate)
+        })
     }
 }
 
@@ -126,13 +103,10 @@ const editWorkExprience = async (req, res) => {
                 studentID: req.body.studentid
             }
         })
-        .then(user => {
-            res.status(200).send({
-                school: user.school,
-                level: user.level,
-                year: user.year
-            })
-        });
+        .then(async() => {    
+            const displayUpdate = await WorkExprience.findOne({where: { studentID: req.body.studentid } })
+            res.send(displayUpdate)
+        })
     }
 }
 
@@ -159,12 +133,10 @@ const editSkills = async (req, res) => {
                 studentID: req.body.studentid
             }
         })
-        .then(user => {
-            res.status(200).send({
-                skills: user.skills,
-                specialty: user.specialty
-            })
-        });
+        .then(async() => {    
+            const displayUpdate = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+            res.send(displayUpdate)
+        })
     }
 }
 
@@ -187,11 +159,10 @@ const editHobby = async (req, res) => {
                 studentID: req.body.studentid
             }
         })
-        .then(user => {
-            res.status(200).send({
-                hobby: user.hobby
-            })
-        });
+        .then(async() => {    
+            const displayUpdate = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+            res.send(displayUpdate)
+        })
     }
 }
 

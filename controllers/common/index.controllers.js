@@ -23,15 +23,34 @@ const uploadFile = (req, res, next) => {
     });
 }
 
-const deleteFile = async(req, res) => {
-    await resources.destroy({
+const deleteFile = async (req, res) => {
+    const delFile = await resources.destroy({
         where: {
             id: req.body.id
         }
     })
+    res.sendStatus(200).send(delFile)
+}
+
+const displayFileDetails = async (req, res) => {
+    const display = await resources.findAll({
+        where: {
+            userID: req.body.userID,
+            type: req.body.type,
+            level: req.body.level
+        }
+    })
+    res.send(display)
+}
+
+const displayFileDownload = async (req, res) => {
+    const file = `${__dirname}/uploads/${req.body.filename}`;
+    res.download(file);
 }
 
 module.exports = {
     uploadFile,
-    deleteFile
+    deleteFile,
+    displayFileDetails,
+    displayFileDownload
 }

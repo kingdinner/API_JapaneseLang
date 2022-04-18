@@ -12,20 +12,33 @@ module.exports = function(app) {
     );
     next();
   });
-
-  app.post(
-    "/api/student/editStudentPersonalInformation",
-    studentController.editStudentPersonalInformation
-  )
-
-  app.post(
+  // resources file and assignment
+  app.get(
     "/api/common/uploadFile",
     commonController.uploadFile
+  )
+
+  app.get(
+    "/api/common/displayFileDetails",
+    commonController.displayFileDetails
+  )
+
+  app.get(
+    "/api/common/displayFileDownload",
+    commonController.displayFileDownload
   )
 
   app.post(
     "/api/common/deleteFile",
     commonController.deleteFile
+  )
+  // ----------------------------------
+
+  // personal information
+
+  app.post(
+    "/api/student/editStudentPersonalInformation",
+    studentController.editStudentPersonalInformation
   )
 
 
@@ -49,15 +62,17 @@ module.exports = function(app) {
     studentController.editHobby
   )
 
+  //-----------------------------------
+
   app.get(
     "/api/admin/recentMembers",
-    [authJwt.verifyToken, authJwt.isAdmin || authJwt.isModerator],
+    [authJwt.verifyToken],
     functionController.recentMembers
   );
 
   app.post(
     "/api/admin/listUserBasedTransaction",
-    [authJwt.verifyToken, authJwt.isAdmin],
+    [authJwt.verifyToken],
     functionController.listUserBasedTransaction
   );
 };
