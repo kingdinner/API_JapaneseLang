@@ -92,13 +92,11 @@ module.exports = function(app) {
   //------------------------------------
   app.get(
     "/api/admin/recentMembers",
-    [authJwt.verifyToken],
     functionController.recentMembers
   );
 
   app.post(
     "/api/admin/listUserBasedTransaction",
-    [authJwt.verifyToken],
     functionController.listUserBasedTransaction
   );
   

@@ -43,6 +43,7 @@ const displayTask = async( req, res ) => {
   res.send(task)
 }
 
+// reuse for task and remainder?
 const remainder = async( req, res ) => {
   const remainder = await task.findAll({
     where: {
