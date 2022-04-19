@@ -176,11 +176,75 @@ const displayGrade = async (req, res) => {
     res.send(grades)
 }
 
+const displayPersonalInformation = async (req, res) => {
+    personalInformation.findOne({
+        where: {
+            studentid: req.body.studentid
+        }
+    })
+    .then(personalInformation => {
+        res.status(200).send({personalInformation});
+    })
+    .catch((error) => {
+        console.log(error.toString());
+        res.status(400).send(error)
+    });
+}
+
+const displayStudentEducation = async (req, res) => {
+    StudentEducation.findOne({
+        where: {
+            studentid: req.body.studentid
+        }
+    })
+    .then(StudentEducation => {
+        res.status(200).send({StudentEducation});
+    })
+    .catch((error) => {
+        console.log(error.toString());
+        res.status(400).send(error)
+    });
+}
+
+const displayWorkExprience = async (req, res) => {
+    WorkExprience.findOne({
+        where: {
+            studentid: req.body.studentid
+        }
+    })
+    .then(WorkExprience => {
+        res.status(200).send({WorkExprience});
+    })
+    .catch((error) => {
+        console.log(error.toString());
+        res.status(400).send(error)
+    });
+}
+
+const displayskillsHobby = async (req, res) => {
+    skillsHobby.findOne({
+        where: {
+            studentid: req.body.studentid
+        }
+    })
+    .then(skillsHobby => {
+        res.status(200).send({skillsHobby});
+    })
+    .catch((error) => {
+        console.log(error.toString());
+        res.status(400).send(error)
+    });
+}
+
 module.exports = {
     editStudentPersonalInformation,
     editStudentEducation,
     editWorkExprience,
     editSkills,
     editHobby,
-    displayGrade
+    displayGrade,
+    displayPersonalInformation,
+    displayStudentEducation,
+    displayskillsHobby,
+    displayWorkExprience
 }

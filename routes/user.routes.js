@@ -12,9 +12,14 @@ module.exports = function(app) {
     next();
   });
   // resources file and assignment
-  app.get(
+  app.post(
     "/api/common/uploadFile",
     commonController.uploadFile
+  )
+
+  app.get(
+    "/api/common/displayFileDetails",
+    commonController.displayFileDetails
   )
 
   app.get(
@@ -67,11 +72,29 @@ module.exports = function(app) {
   )
 
   app.get(
+    "/api/student/displayPersonalInformation",
+    studentController.displayPersonalInformation
+  )
+
+  app.get(
+    "/api/student/displayStudentEducation",
+    studentController.displayStudentEducation
+  )
+  
+  app.get(
+    "/api/student/displayWorkExprience",
+    studentController.displayWorkExprience
+  )
+
+  app.get(
+    "/api/student/displayskillsHobby",
+    studentController.displayskillsHobby
+  )
+
+  app.get(
     "/api/admin/numberOfUsers",
     functionController.numberOfUsers
   )
-
-  
 
   //-----------------------------------
   
@@ -88,7 +111,7 @@ module.exports = function(app) {
   );
 
   app.get(
-    "/api/admin/displayTask",
+    "/api/admin/remainder",
     functionController.remainder
   );
   
@@ -98,6 +121,11 @@ module.exports = function(app) {
   app.post(
     "/api/admin/addGrade",
     functionController.addGrade
+  );
+
+  app.get(
+    "/api/admin/oneStudentGrade",
+    functionController.oneStudentGrade
   );
 
   //------------------------------------
