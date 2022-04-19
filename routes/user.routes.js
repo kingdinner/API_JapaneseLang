@@ -1,5 +1,4 @@
 const { authJwt } = require("../middleware");
-const controller = require("../controllers/user.controllers");
 const functionController = require("../controllers/admin/dashboard.controllers");
 const studentController = require("../controllers/student/student.controllers");
 const commonController = require("../controllers/common/index.controllers");
@@ -67,8 +66,15 @@ module.exports = function(app) {
     studentController.displayGrade
   )
 
-  //-----------------------------------
+  app.get(
+    "/api/admin/numberOfUsers",
+    functionController.numberOfUsers
+  )
 
+  
+
+  //-----------------------------------
+  
   // task
 
   app.get(

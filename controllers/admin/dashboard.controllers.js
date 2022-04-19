@@ -46,6 +46,21 @@ const activedAccount = async (req, res) => {
   })
 }
 
+const numberOfUsers = async (req, res) => {
+  const studentNum = await User.count({
+    where: {
+      accounttype: 'student'
+    }
+  })
+  const professorNum = await User.count({
+    where: {
+      accounttype: 'professor'
+    }
+  })
+  
+  res.send({student: studentNum, professor:professorNum})
+}
+
 const listUserBasedTransaction = (req, res) => {
     User.findAll({
       where: {
@@ -116,5 +131,6 @@ module.exports = {
     addGrade,
     oneStudentGrade,
     editEmployees,
-    activedAccount
+    activedAccount,
+    numberOfUsers
 }
