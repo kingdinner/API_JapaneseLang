@@ -107,8 +107,8 @@ module.exports = function(app) {
   );
 
   app.post(
-    "/api/admin/listUserBasedTransaction",
-    functionController.listUserBasedTransaction
+    "/api/admin/listUserBasedTypes",
+    functionController.listUserBasedTypes
   );
 
   app.post(

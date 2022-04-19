@@ -61,7 +61,7 @@ const numberOfUsers = async (req, res) => {
   res.send({student: studentNum, professor:professorNum})
 }
 
-const listUserBasedTransaction = (req, res) => {
+const listUserBasedTypes = (req, res) => {
     User.findAll({
       where: {
         accounttype: req.body.accounttype
@@ -124,7 +124,7 @@ const oneStudentGrade = async (req, res) => {
 
 module.exports = {
     recentMembers,
-    listUserBasedTransaction,
+    listUserBasedTypes,
     addTask,
     displayTask,
     remainder,
