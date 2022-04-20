@@ -96,6 +96,16 @@ module.exports = function(app) {
     functionController.numberOfUsers
   )
 
+  app.get(
+    "/api/admin/displayPrimaryInformation",
+    functionController.displayPrimaryInformation
+  )
+
+  app.get(
+    "/api/admin/editPrimaryInformation",
+    functionController.editPrimaryInformation
+  )
+
   //-----------------------------------
   
   // task
@@ -114,6 +124,8 @@ module.exports = function(app) {
     "/api/admin/remainder",
     functionController.remainder
   );
+
+  
   
   // ----------------------------------
   // Grade

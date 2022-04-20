@@ -87,6 +87,11 @@ const addTask = async( req, res ) => {
   res.send(task)
 }
 
+const numberOfTask = async (req, res) => {
+  // const task = await task.findAll()
+  
+}
+
 const displayTask = async( req, res ) => {
   const task = await task.findAll()
   res.send(task)

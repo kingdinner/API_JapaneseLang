@@ -1,9 +1,29 @@
 const db = require("../../models");
+const userInformation = db.user
 const personalInformation = db.personalInformation;
 const StudentEducation = db.userEducation;
 const WorkExprience = db.userWorkExperience;
 const skillsHobby = db.skills
 const grade = db.grade
+
+const editPrimaryInformation = async (req, res) => {
+    userInformation.update({ 
+        lastname: req.body.lastname,
+        firstname: req.body.firstname,
+        address: req.body.address,
+        dateofbirth:  req.body.dateofbirth,
+        gender: req.body.gender,
+        contactnumber: req.body.contactnumber,
+        SNSAccount:  req.body.SNSAccount
+    }, {
+        where: {
+            studentID: req.body.studentid,
+        }
+    }).then(async() => {    
+        const displayUpdate = await userInformation.findOne({where: { studentID: req.body.studentid } })
+        res.send(displayUpdate)
+    })
+}
 
 const editStudentPersonalInformation = async (req, res) => {
     const existAccountID = await personalInformation.findOne({where: { studentID: req.body.studentid } })
@@ -176,7 +196,7 @@ const displayGrade = async (req, res) => {
     res.send(grades)
 }
 
-const displayPersonalInformation = async (req, res) => {
+const displayPersonalInformation = (req, res) => {
     personalInformation.findOne({
         where: {
             studentid: req.body.studentid
@@ -206,7 +226,7 @@ const displayStudentEducation = async (req, res) => {
     });
 }
 
-const displayWorkExprience = async (req, res) => {
+const displayWorkExprience = (req, res) => {
     WorkExprience.findOne({
         where: {
             studentid: req.body.studentid
@@ -221,7 +241,22 @@ const displayWorkExprience = async (req, res) => {
     });
 }
 
-const displayskillsHobby = async (req, res) => {
+const displayPrimaryInformation = (req, res) => {
+    personalInformation.findOne({
+        where: {
+            studentid: req.body.studentid
+        }
+    })
+    .then(personalInformations => {
+        res.status(200).send({personalInformations});
+    })
+    .catch((error) => {
+        console.log(error.toString());
+        res.status(400).send(error)
+    });
+}
+
+const displayskillsHobby =  (req, res) => {
     skillsHobby.findOne({
         where: {
             studentid: req.body.studentid
@@ -242,6 +277,8 @@ module.exports = {
     editWorkExprience,
     editSkills,
     editHobby,
+    editPrimaryInformation,
+    displayPrimaryInformation,
     displayGrade,
     displayPersonalInformation,
     displayStudentEducation,
