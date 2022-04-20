@@ -97,13 +97,13 @@ module.exports = function(app) {
   )
 
   app.get(
-    "/api/admin/displayPrimaryInformation",
-    functionController.displayPrimaryInformation
+    "/api/student/displayPrimaryInformation",
+    studentController.displayPrimaryInformation
   )
 
-  app.get(
-    "/api/admin/editPrimaryInformation",
-    functionController.editPrimaryInformation
+  app.post(
+    "/api/student/editPrimaryInformation",
+    studentController.editPrimaryInformation
   )
 
   //-----------------------------------
