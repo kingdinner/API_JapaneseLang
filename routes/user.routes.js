@@ -17,17 +17,17 @@ module.exports = function(app) {
     commonController.uploadFile
   )
 
-  app.get(
+  app.post(
     "/api/common/displayFileDetails",
     commonController.displayFileDetails
   )
 
-  app.get(
+  app.post(
     "/api/common/displayFileDetails",
     commonController.displayFileDetails
   )
 
-  app.get(
+  app.post(
     "/api/common/displayFileDownload",
     commonController.displayFileDownload
   )
@@ -66,37 +66,37 @@ module.exports = function(app) {
     studentController.editHobby
   )
 
-  app.get(
+  app.post(
     "/api/student/displayGrade",
     studentController.displayGrade
   )
 
-  app.get(
+  app.post(
     "/api/student/displayPersonalInformation",
     studentController.displayPersonalInformation
   )
 
-  app.get(
+  app.post(
     "/api/student/displayStudentEducation",
     studentController.displayStudentEducation
   )
   
-  app.get(
+  app.post(
     "/api/student/displayWorkExprience",
     studentController.displayWorkExprience
   )
 
-  app.get(
+  app.post(
     "/api/student/displayskillsHobby",
     studentController.displayskillsHobby
   )
 
-  app.get(
+  app.post(
     "/api/admin/numberOfUsers",
     functionController.numberOfUsers
   )
 
-  app.get(
+  app.post(
     "/api/student/displayPrimaryInformation",
     studentController.displayPrimaryInformation
   )
