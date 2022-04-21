@@ -244,7 +244,7 @@ const displayWorkExprience = (req, res) => {
 const displayPrimaryInformation = (req, res) => {
     userInformation.findOne({
         where: {
-            studentid: req.body.studentid
+            userid: req.body.userid
         }
     })
     .then(userInformation => {
