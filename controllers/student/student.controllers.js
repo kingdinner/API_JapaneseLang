@@ -242,13 +242,13 @@ const displayWorkExprience = (req, res) => {
 }
 
 const displayPrimaryInformation = (req, res) => {
-    personalInformation.findOne({
+    userInformation.findOne({
         where: {
             studentid: req.body.studentid
         }
     })
-    .then(personalInformations => {
-        res.status(200).send({personalInformations});
+    .then(userInformation => {
+        res.status(200).send({userInformation});
     })
     .catch((error) => {
         console.log(error.toString());
