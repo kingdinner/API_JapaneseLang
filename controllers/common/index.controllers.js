@@ -23,6 +23,10 @@ const uploadFile = (req, res, next) => {
     });
 }
 
+const logOut = (req, res) => {
+    res.json({ 'success': data.success, 'message': data.message });
+}
+
 const deleteFile = async (req, res) => {
     const delFile = await resources.destroy({
         where: {
@@ -52,5 +56,6 @@ module.exports = {
     uploadFile,
     deleteFile,
     displayFileDetails,
-    displayFileDownload
+    displayFileDownload,
+    logOut
 }

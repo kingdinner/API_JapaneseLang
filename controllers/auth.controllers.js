@@ -17,7 +17,13 @@ const latestIDStudent = async (req, res) => {
 exports.signup = async (req, res) => {
   // Save User to Database
   const numberStudent = await latestIDStudent()
-  console.log(numberStudent.id)
+
+  var userActivation = 1
+
+  if (req.body.roles == "student") {
+    userActivation = 0
+  }
+  
   User.create({
     userid: `CC${numberStudent.id == undefined ? 1 : parseInt(numberStudent.id) + 1}`,
     username: req.body.username,
@@ -30,7 +36,7 @@ exports.signup = async (req, res) => {
     gender: req.body.gender,
     contactnumber: req.body.contactnumber,
     accounttype: req.body.roles,
-    statusaccount: 0
+    statusaccount: userActivation
   })
     .then(user => {
         // user role = 1

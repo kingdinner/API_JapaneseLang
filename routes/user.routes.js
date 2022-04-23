@@ -101,6 +101,11 @@ module.exports = function(app) {
     studentController.displayPrimaryInformation
   )
 
+  app.get(
+    "/api/student/displayPrimaryInformation",
+    commonController.logOut
+  )
+
   app.post(
     "/api/student/editPrimaryInformation",
     studentController.editPrimaryInformation
