@@ -96,32 +96,22 @@ const addTask = async( req, res ) => {
 
 const numberOfTask = async (req, res) => {
   const tasks = await task.findAll()
-  let studentID = []
-  let taskNumberData = []
+  const studentID = []
+  // const counts = []
   tasks.forEach(element => {
-    if (!(studentID.includes(element.studentid))) {
-      studentID.push(element.studentid)
-    }
+    // if (!(studentID.includes(element.studentid))) {
+    studentID.push(element.studentid)
+    // }
   });
-  studentID.forEach( async(elements) => {
-    const countNumberTaskByStudent = await task.count({
-      where: {
-        studentID: elements
-      }
-    })
-    const userListName  = await User.findOne({
-      where: {
-        userid: elements
-      }
-    })
-    if (userListName !== null) {
-      taskNumberData.push({ "studentID": userListName.userid, "studentName": userListName.firstname, "numberOFtask": countNumberTaskByStudent })
-      console.log(taskNumberData)
-    }
-  });
-  // taskNumberData.push({ "studentID": userListName.userid, "studentName": userListName.firstname, "numberOFtask": countNumberTaskByStudent })
-  res.send(taskNumberData)
+
+  const counts = studentID.reduce((acc, value) => ({
+    ...acc,
+    [value]: (acc[value] || 0) + 1
+  }), {});
+  
+  res.send(counts)
 }
+
 
 const displayTask = async( req, res ) => {
   const task = await task.findAll()
