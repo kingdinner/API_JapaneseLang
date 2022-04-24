@@ -77,19 +77,50 @@ const listUserBasedTypes = (req, res) => {
 }
 
 const addTask = async( req, res ) => {
-  const task = await task.create({
+  task.create({
     studentid: req.body.studentid,
     taskname: req.body.taskname,
     details: req.body.details,
     date: req.body.date,
     deadline: req.body.deadline
   })
-  res.send(task)
+  .then(task => {
+    res.status(200).send({task});
+  })
+  .catch((error) => {
+    console.log(error.toString());
+    res.status(400).send(error)
+  });
+  // res.send(task)
 }
 
 const numberOfTask = async (req, res) => {
-  // const task = await task.findAll()
-  
+  const tasks = await task.findAll()
+  let studentID = []
+  let taskNumberData = []
+  tasks.forEach(element => {
+    if (!(studentID.includes(element.studentid))) {
+      studentID.push(element.studentid)
+    }
+  });
+  studentID.forEach( async(elements) => {
+    const countNumberTaskByStudent = await task.count({
+      where: {
+        studentID: elements
+      }
+    })
+    const userListName  = await User.findOne({
+      where: {
+        userid: elements
+      }
+    })
+    if (userListName !== null) {
+      taskNumberData.push({ "studentID": userListName.userid, "studentName": userListName.firstname, "numberOFtask": countNumberTaskByStudent })
+      console.log(taskNumberData)
+    }
+  });
+  // taskNumberData.push({ "studentID": userListName.userid, "studentName": userListName.firstname, "numberOFtask": countNumberTaskByStudent })
+  res.send(taskNumberData)
 }
 
 const displayTask = async( req, res ) => {
@@ -108,14 +139,20 @@ const remainder = async( req, res ) => {
 }
 
 const addGrade = async (req, res) => {
-  const grade = await grades.create({
+  grades.create({
     studentid: req.body.studentid,
     subject: req.body.subject,
     grade: req.body.grade,
     status: req.body.status,
     date: req.body.date
   })
-  res.send(grade)
+  .then(grade => {
+    res.status(200).send({grade});
+  })
+  .catch((error) => {
+    console.log(error.toString());
+    res.status(400).send(error)
+  });
 }
 
 const oneStudentGrade = async (req, res) => {
@@ -137,5 +174,6 @@ module.exports = {
     oneStudentGrade,
     editEmployees,
     activedAccount,
-    numberOfUsers
+    numberOfUsers,
+    numberOfTask
 }

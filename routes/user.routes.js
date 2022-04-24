@@ -106,6 +106,11 @@ module.exports = function(app) {
     commonController.logOut
   )
 
+  app.get(
+    "/api/admin/numberOfTask",
+    functionController.numberOfTask
+  )
+
   app.post(
     "/api/student/editPrimaryInformation",
     studentController.editPrimaryInformation
