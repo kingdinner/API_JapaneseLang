@@ -145,10 +145,15 @@ module.exports = function(app) {
     functionController.addGrade
   );
 
-  app.get(
+  app.post(
     "/api/admin/oneStudentGrade",
     functionController.oneStudentGrade
   );
+
+  app.post(
+    "/api/admin/deleteGrade",
+    functionController.deleteGrade
+  )
 
   //------------------------------------
   app.get(

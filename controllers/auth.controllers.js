@@ -49,6 +49,20 @@ exports.signup = async (req, res) => {
     res.status(500).send({ message: err.message });
   });
 };
+
+exports.deleteUser = (req, res) => {
+  User.destroy({
+    where: {
+      userid: req.body.userid    }
+ }).then((rowDeleted) => {
+   if(rowDeleted === 1){
+      res.send('Deleted successfully');
+    }
+ }, function(err){
+     res.send(err); 
+ });
+}
+
 exports.signin = (req, res) => {
   // console.log(req.body.username)
   User.findOne({

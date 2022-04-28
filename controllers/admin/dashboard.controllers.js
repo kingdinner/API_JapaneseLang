@@ -97,11 +97,8 @@ const addTask = async( req, res ) => {
 const numberOfTask = async (req, res) => {
   const tasks = await task.findAll()
   const studentID = []
-  // const counts = []
   tasks.forEach(element => {
-    // if (!(studentID.includes(element.studentid))) {
     studentID.push(element.studentid)
-    // }
   });
 
   const counts = studentID.reduce((acc, value) => ({
@@ -126,6 +123,19 @@ const remainder = async( req, res ) => {
     }
   })
   res.send(remainder)
+}
+
+const deleteGrade =  (req, res) => {
+  grades.destroy({
+    where: {
+      studentid: req.body.studentid    }
+ }).then((rowDeleted) => {
+   if(rowDeleted === 1){
+      res.send('Deleted successfully');
+    }
+ }, function(err){
+     res.send(err); 
+ });
 }
 
 const addGrade = async (req, res) => {
@@ -165,5 +175,6 @@ module.exports = {
     editEmployees,
     activedAccount,
     numberOfUsers,
-    numberOfTask
+    numberOfTask,
+    deleteGrade
 }
