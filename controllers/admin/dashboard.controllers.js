@@ -94,9 +94,10 @@ const addTask = async( req, res ) => {
   // res.send(task)
 }
 
-const numberOfTask = async (req, res) => {
+const displayTask = async (req, res) => {
   const tasks = await task.findAll()
   const studentID = []
+  const studentList = []
   tasks.forEach(element => {
     studentID.push(element.studentid)
   });
@@ -105,15 +106,40 @@ const numberOfTask = async (req, res) => {
     ...acc,
     [value]: (acc[value] || 0) + 1
   }), {});
+
+  for (let [key, value] of Object.entries(counts)) {
+    const studentName = await User.findOne({
+      where: {
+        userid: key
+      }
+    })
+
+    if (studentName !== null) {
+      studentList.push({
+        id: key,
+        name: `${studentName.firstname} ${studentName.lastname}`,
+        value: value
+      })
+    }
+  }
   
-  res.send(counts)
+  res.send(studentList)
 }
 
-
-const displayTask = async( req, res ) => {
-  const task = await task.findAll()
-  res.send(task)
+const removeTask = async(req, res) => {
+  task.destroy({
+    where: {
+      studentid: req.body.studentid
+    }
+ }).then((rowDeleted) => {
+   if(rowDeleted === 1){
+      res.send('Deleted successfully');
+    }
+ }, function(err){
+     res.send(err); 
+ });  
 }
+
 
 // reuse for task and remainder?
 const remainder = async( req, res ) => {
@@ -175,6 +201,6 @@ module.exports = {
     editEmployees,
     activedAccount,
     numberOfUsers,
-    numberOfTask,
-    deleteGrade
+    deleteGrade,
+    removeTask
 }

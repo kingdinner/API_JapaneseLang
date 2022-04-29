@@ -106,11 +106,6 @@ module.exports = function(app) {
     commonController.logOut
   )
 
-  app.get(
-    "/api/admin/numberOfTask",
-    functionController.numberOfTask
-  )
-
   app.post(
     "/api/student/editPrimaryInformation",
     studentController.editPrimaryInformation
@@ -134,8 +129,10 @@ module.exports = function(app) {
     "/api/admin/remainder",
     functionController.remainder
   );
-
-  
+  app.post(
+    "/api/admin/removeTask",
+    functionController.removeTask
+  );
   
   // ----------------------------------
   // Grade
