@@ -22,6 +22,11 @@ module.exports = function(app) {
     commonController.displayFileDetails
   )
 
+  app.get(
+    "/api/common/displayAllFile",
+    commonController.displayAllFile
+  )  
+
   app.post(
     "/api/common/displayFileDownload",
     commonController.displayFileDownload

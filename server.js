@@ -14,7 +14,8 @@ const storage = multer.diskStorage({
      cb(null, 'uploads');
   },
   filename: function (req, file, cb) {
-     cb(null, `${file.fieldname}-${Date.now()}${path.extname(file.originalname)}`);
+    const fileName = file.originalname.split(".");
+     cb(null, `${fileName[0]}-${Date.now()}${path.extname(file.originalname)}`);
   }
 });
 const upload = multer({ storage: storage });
@@ -23,9 +24,9 @@ app.use(upload.any());
 
 app.use(cors(corsOptions));
 // parse requests of content-type - application/json
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
 // parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
 // simple route
 // const db = require("./models");
 // const Role = db.role;

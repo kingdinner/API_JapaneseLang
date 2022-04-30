@@ -1,9 +1,9 @@
 const db = require("../../models");
 const multer = require('multer')
 const resources = db.resources
+const User = db.user;
 
 const uploadFile = (req, res, next) => {
-    console.log(req.files[0].filename);
     const file = req.files
     if (!file) {
         return res.status(400).send({ message: 'Please upload a file.' });
@@ -16,7 +16,21 @@ const uploadFile = (req, res, next) => {
         level: req.body.level,
         type: req.body.type
     })
-    .then(users => res.status(200).send(users))
+    .then(async(users) => {
+        const userName = await User.findOne({
+            where: {
+                userid: req.body.userID
+            }
+        })
+        res.status(200).send({
+            userID:users.userID,
+            taskID:users.taskID,
+            name: `${userName.firstname} ${userName.lastname}`,
+            uploaded:users.updatedAt,
+            filename:users.filename,
+            type:users.type
+        })
+    })
     .catch((error) => {
       console.log(error.toString());
       res.status(400).send(error)
@@ -40,10 +54,14 @@ const displayFileDetails = async (req, res) => {
     const display = await resources.findAll({
         where: {
             userID: req.body.userID,
-            type: req.body.type,
-            level: req.body.level
+            type: req.body.type
         }
     })
+    res.send(display)
+}
+
+const displayAllFile = async (req, res) => {
+    const display = await resources.findAll()
     res.send(display)
 }
 
@@ -53,6 +71,7 @@ const displayFileDownload = async (req, res) => {
 }
 
 module.exports = {
+    displayAllFile,
     uploadFile,
     deleteFile,
     displayFileDetails,
