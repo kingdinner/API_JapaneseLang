@@ -140,6 +140,23 @@ const removeTask = async(req, res) => {
  });  
 }
 
+const editTask = async (req, res) => {
+  task.update({
+    taskname: req.body.taskname,
+    details: req.body.details,
+    date: req.body.date,
+    deadline: req.body.deadline
+  }, {
+    where: {
+      studentid: req.body.studentid,
+    }
+  })
+  .then(async() => {    
+    const task = await task.findOne({where: { studentid: req.body.studentid } })
+    res.send(task)
+  })
+}
+
 
 // reuse for task and remainder?
 const remainder = async( req, res ) => {
@@ -181,6 +198,23 @@ const addGrade = async (req, res) => {
   });
 }
 
+const editGrade = async (req, res) => {
+  task.update({
+    subject: req.body.subject,
+    grade: req.body.grade,
+    status: req.body.status,
+    date: req.body.date
+  }, {
+    where: {
+      studentid: req.body.studentid,
+    }
+  })
+  .then(async() => {    
+    const task = await task.findOne({where: { studentid: req.body.studentid } })
+    res.send(task)
+  })
+}
+
 const oneStudentGrade = async (req, res) => {
   const studentGrade = await grades.findAll({
     where: {
@@ -202,5 +236,7 @@ module.exports = {
     activedAccount,
     numberOfUsers,
     deleteGrade,
-    removeTask
+    removeTask,
+    editTask,
+    editGrade
 }

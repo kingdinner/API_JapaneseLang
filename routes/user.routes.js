@@ -125,6 +125,11 @@ module.exports = function(app) {
     functionController.addTask
   );
 
+  app.post(
+    "/api/admin/editTask",
+    functionController.editTask
+  );
+
   app.get(
     "/api/admin/remainder",
     functionController.remainder
@@ -150,6 +155,11 @@ module.exports = function(app) {
   app.post(
     "/api/admin/deleteGrade",
     functionController.deleteGrade
+  )
+
+  app.post(
+    "/api/student/editGrade",
+    functionController.editGrade
   )
 
   //------------------------------------
