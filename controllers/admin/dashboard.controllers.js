@@ -96,25 +96,13 @@ const addTask = async( req, res ) => {
 }
 
 const singleTask = async(req, res) => {
-  task.findOne({
+  task.findAll({
     where: {
       studentid: req.body.studentid
     }
   })
-  .then(async(task) => {
-    const userName = await User.findOne({
-      where: {
-          userid: task.studentid
-      }
-    })
-    res.status(200).send({
-        studentid: task.studentid,
-        taskname: task.taskname,
-        name: `${userName.firstname} ${userName.lastname}`,
-        details: task.details,
-        date: task.date,
-        deadline: task.deadline
-    })
+  .then(task => {
+    res.status(200).send(task)
   })
   .catch((error) => {
     console.log(error.toString());
