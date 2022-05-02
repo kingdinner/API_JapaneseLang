@@ -2,6 +2,7 @@ const db = require("../../models");
 const User = db.user;
 const task = db.task;
 const grades = db.grade;
+const Sequelize = require("sequelize");
 
 const recentMembers = (req, res) => {
     User.findAll({order: [['createdAt', 'DESC']]})
@@ -149,7 +150,21 @@ const displayTask = async (req, res) => {
       })
     }
   }
-  
+
+  const studentLists = await User.findAll({
+    where: {
+      [Sequelize.Op.not]:{userid:Object.keys(counts)}
+    }
+  })
+  for (let index = 0; index < studentLists.length; index++) {
+    const dataNumber = studentLists[index]
+    studentList.push({
+      id: dataNumber.userid,
+      name: `${dataNumber.firstname} ${dataNumber.lastname}`,
+      value: 0
+    })
+  }
+
   res.send(studentList)
 }
 
