@@ -19,7 +19,7 @@ const uploadFile = (req, res, next) => {
     .then(async(users) => {
         const userName = await User.findOne({
             where: {
-                userid: req.body.userID
+                userid: users.userID
             }
         })
         res.status(200).send({
