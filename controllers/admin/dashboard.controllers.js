@@ -134,6 +134,7 @@ const displayTask = async (req, res) => {
       studentList.push({
         id: key,
         name: `${studentName.firstname} ${studentName.lastname}`,
+        accountType: studentName.accounttype,
         value: value
       })
     }

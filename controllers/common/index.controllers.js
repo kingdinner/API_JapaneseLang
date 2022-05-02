@@ -50,14 +50,15 @@ const deleteFile = async (req, res) => {
     res.sendStatus(200).send(delFile)
 }
 
-const displayFileDetails = async (req, res) => {
-    const display = await resources.findAll({
+const displayFileDetails = (req, res) => {
+    resources.findAll({
         where: {
-            userID: req.body.userID,
-            type: req.body.type
+            userID: req.body.userID
         }
     })
-    res.send(display)
+    .then(user => {
+        res.send(user)
+    })
 }
 
 const displayAllFile = async (req, res) => {
@@ -66,7 +67,7 @@ const displayAllFile = async (req, res) => {
 }
 
 const displayFileDownload = async (req, res) => {
-    const file = `${__dirname}/uploads/${req.body.filename}`;
+    const file = `./uploads/${req.body.filename}`;
     res.download(file);
 }
 
