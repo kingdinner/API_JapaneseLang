@@ -126,6 +126,11 @@ module.exports = function(app) {
   );
 
   app.post(
+    "/api/admin/singleTask",
+    functionController.singleTask
+  );
+
+  app.post(
     "/api/admin/editTask",
     functionController.editTask
   );

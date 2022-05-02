@@ -94,6 +94,33 @@ const addTask = async( req, res ) => {
   // res.send(task)
 }
 
+const singleTask = async(req, res) => {
+  task.findOne({
+    where: {
+      studentid: req.body.studentid
+    }
+  })
+  .then(async(task) => {
+    const userName = await User.findOne({
+      where: {
+          userid: task.studentid
+      }
+    })
+    res.status(200).send({
+        studentid: task.studentid,
+        taskname: task.taskname,
+        name: `${userName.firstname} ${userName.lastname}`,
+        details: task.details,
+        date: task.date,
+        deadline: task.deadline
+    })
+  })
+  .catch((error) => {
+    console.log(error.toString());
+    res.status(400).send(error)
+  });
+}
+
 const displayTask = async (req, res) => {
   const tasks = await task.findAll()
   const studentID = []
@@ -238,5 +265,6 @@ module.exports = {
     deleteGrade,
     removeTask,
     editTask,
-    editGrade
+    editGrade,
+    singleTask
 }
