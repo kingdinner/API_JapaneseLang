@@ -43,12 +43,12 @@ const logOut = (req, res) => {
 }
 
 const deleteFile = async (req, res) => {
+    fs.unlinkSync(`./uploads/${req.body.filename}`);
     const delFile = await resources.destroy({
         where: {
             id: req.body.id
         }
     })
-    // fs.unlinkSync(`./uploads/${req.body.filename}`);
     res.sendStatus(200).send(delFile)
 }
 
@@ -65,6 +65,7 @@ const displayFileDetails = (req, res) => {
 
 const displayAllFile = async (req, res) => {
     const display = await resources.findAll()
+    // loop
     res.send(display)
 }
 
