@@ -91,7 +91,7 @@ const editStudentEducation = async (req, res) => {
             year: req.body.year
         }, {
             where: {
-                studentID: req.body.studentid
+                id: req.body.id
             }
         })
         .then(async() => {    
@@ -126,7 +126,7 @@ const editWorkExprience = async (req, res) => {
             year: req.body.year
         }, {
             where: {
-                studentID: req.body.studentid
+                id: req.body.id
             }
         })
         .then(async() => {    
@@ -159,7 +159,7 @@ const editSkills = async (req, res) => {
             specialty: req.body.specialty
         }, {
             where: {
-                studentID: req.body.studentid
+                id: req.body.id
             }
         })
         .then(async() => {    
@@ -188,7 +188,7 @@ const editHobby = async (req, res) => {
             hobby: req.body.hobby
         }, {
             where: {
-                studentID: req.body.studentid
+                id: req.body.id
             }
         })
         .then(async() => {    
