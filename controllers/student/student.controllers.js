@@ -17,10 +17,10 @@ const editPrimaryInformation = async (req, res) => {
         SNSAccount:  req.body.SNSAccount
     }, {
         where: {
-            studentid: req.body.studentid,
+            userid: req.body.studentid,
         }
     }).then(async() => {    
-        const displayUpdate = await userInformation.findOne({where: { studentid: req.body.studentid } })
+        const displayUpdate = await userInformation.findOne({where: { userid: req.body.studentid } })
         res.send(displayUpdate)
     })
 }

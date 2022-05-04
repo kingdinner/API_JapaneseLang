@@ -3,6 +3,7 @@ const User = db.user;
 const task = db.task;
 const grades = db.grade;
 const Sequelize = require("sequelize");
+var bcrypt = require("bcryptjs");
 
 const recentMembers = (req, res) => {
     User.findAll({order: [['createdAt', 'DESC']]})
@@ -14,6 +15,20 @@ const recentMembers = (req, res) => {
 }
 
 const editEmployees = async (req, res) => {
+  // const updateEmployee = {
+  //   username: req.body.username,
+  //   email: req.body.email,
+  //   lastname: req.body.lastname,
+  //   firstname: req.body.firstname,
+  //   address: req.body.address,
+  //   contactnumber: req.body.contactnumber
+  // }
+
+
+  // if (!req.body.password) {
+  //   updateEmployee.push()
+  // }
+
   User.update({
     username: req.body.username,
     email: req.body.email,

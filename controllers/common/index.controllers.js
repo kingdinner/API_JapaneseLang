@@ -2,6 +2,7 @@ const db = require("../../models");
 const multer = require('multer')
 const resources = db.resources
 const User = db.user;
+var fs = require('fs');
 
 const uploadFile = (req, res, next) => {
     const file = req.files
@@ -47,6 +48,7 @@ const deleteFile = async (req, res) => {
             id: req.body.id
         }
     })
+    // fs.unlinkSync(`./uploads/${req.body.filename}`);
     res.sendStatus(200).send(delFile)
 }
 
