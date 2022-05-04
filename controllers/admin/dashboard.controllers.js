@@ -156,6 +156,7 @@ const displayTask = async (req, res) => {
     studentList.push({
       id: dataNumber.userid,
       name: `${dataNumber.firstname} ${dataNumber.lastname}`,
+      accountType: dataNumber.accounttype,
       value: 0
     })
   }
