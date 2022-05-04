@@ -17,10 +17,10 @@ const editPrimaryInformation = async (req, res) => {
         SNSAccount:  req.body.SNSAccount
     }, {
         where: {
-            studentID: req.body.studentid,
+            studentid: req.body.studentid,
         }
     }).then(async() => {    
-        const displayUpdate = await userInformation.findOne({where: { studentID: req.body.studentid } })
+        const displayUpdate = await userInformation.findOne({where: { studentid: req.body.studentid } })
         res.send(displayUpdate)
     })
 }
@@ -67,6 +67,9 @@ const editStudentPersonalInformation = async (req, res) => {
 
 const editStudentEducation = async (req, res) => {
     const existAccountID = await StudentEducation.findOne({where: { studentID: req.body.studentid } })
+    if (req.body.create = "new") {
+        existAccountID = 'new'
+    }
     if (!existAccountID) {
         StudentEducation.create({
             studentID: req.body.studentid,
@@ -100,24 +103,26 @@ const editStudentEducation = async (req, res) => {
 
 const editWorkExprience = async (req, res) => {
     const existAccountID = await WorkExprience.findOne({where: { studentID: req.body.studentid } })
+    if (req.body.create = "new") {
+        existAccountID = 'new'
+    }
     if (!existAccountID) {
         WorkExprience.create({
-            studentID: req.body.studentid,
-            school: req.body.school,
-            level: req.body.level,
+            position: req.body.position,
+            company: req.body.company,
             year: req.body.year
         })
         .then(user => {
             res.status(200).send({
-                school: user.school,
-                level: user.level,
-                year: user.year
+                position: req.body.position,
+                company: req.body.company,
+                year: req.body.year
             })
         })        
     } else {
         WorkExprience.update({ 
-            school: req.body.school,
-            level: req.body.level,
+            position: req.body.position,
+            company: req.body.company,
             year: req.body.year
         }, {
             where: {
@@ -125,7 +130,7 @@ const editWorkExprience = async (req, res) => {
             }
         })
         .then(async() => {    
-            const displayUpdate = await WorkExprience.findOne({where: { studentID: req.body.studentid } })
+            const displayUpdate = await WorkExprience.findAll({where: { studentID: req.body.studentid } })
             res.send(displayUpdate)
         })
     }
@@ -134,6 +139,9 @@ const editWorkExprience = async (req, res) => {
 
 const editSkills = async (req, res) => {
     const existAccountID = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+    if (req.body.create = "new") {
+        existAccountID = 'new'
+    }
     if (!existAccountID) {
         skillsHobby.create({
             skills: req.body.skills,
@@ -163,6 +171,9 @@ const editSkills = async (req, res) => {
 
 const editHobby = async (req, res) => {
     const existAccountID = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+    if (req.body.create = "new") {
+        existAccountID = 'new'
+    }
     if (!existAccountID) {
         skillsHobby.create({
             hobby: req.body.hobby
