@@ -1,4 +1,6 @@
 const db = require("../../models");
+var bcrypt = require("bcryptjs");
+
 const userInformation = db.user
 const personalInformation = db.personalInformation;
 const StudentEducation = db.userEducation;
@@ -7,7 +9,7 @@ const skillsHobby = db.skills
 const grade = db.grade
 
 const editPrimaryInformation = async (req, res) => {
-    userInformation.update({ 
+    const updateStudent = {
         lastname: req.body.lastname,
         firstname: req.body.firstname,
         address: req.body.address,
@@ -15,7 +17,13 @@ const editPrimaryInformation = async (req, res) => {
         gender: req.body.gender,
         contactnumber: req.body.contactnumber,
         SNSAccount:  req.body.SNSAccount
-    }, {
+      }
+    
+      if (req.body.password !== undefined) {
+        updateStudent.push({password: bcrypt.hashSync(req.body.password, 8)})
+      }
+
+    userInformation.update(updateStudent, {
         where: {
             userid: req.body.studentid,
         }
