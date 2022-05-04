@@ -15,29 +15,20 @@ const recentMembers = (req, res) => {
 }
 
 const editEmployees = async (req, res) => {
-  // const updateEmployee = {
-  //   username: req.body.username,
-  //   email: req.body.email,
-  //   lastname: req.body.lastname,
-  //   firstname: req.body.firstname,
-  //   address: req.body.address,
-  //   contactnumber: req.body.contactnumber
-  // }
-
-
-  // if (!req.body.password) {
-  //   updateEmployee.push()
-  // }
-
-  User.update({
+  const updateEmployee = {
     username: req.body.username,
     email: req.body.email,
-    password: bcrypt.hashSync(req.body.password, 8),
     lastname: req.body.lastname,
     firstname: req.body.firstname,
     address: req.body.address,
-    contactnumber: req.body.contactnumber
-  }, {
+    contactnumber: req.body.contactnumber,
+  }
+
+  if (req.body.password !== undefined) {
+    updateEmployee.push({password: bcrypt.hashSync(req.body.password, 8)})
+  }
+
+  User.update(updateEmployee, {
     where: {
       userid: req.body.userid,
     }
