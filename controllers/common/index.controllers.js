@@ -65,8 +65,26 @@ const displayFileDetails = (req, res) => {
 
 const displayAllFile = async (req, res) => {
     const display = await resources.findAll()
+    const displayFiles = []
+    display.forEach(element => {
+        User.findOne({
+            where: {
+                userid: element.userID
+            }
+        })
+        displayFiles.push({
+            userID:element.userID,
+            taskID:element.taskID,
+            uploaded:element.updatedAt,
+            // name: `${name.firstname} ${name.lastname}`,
+            filename:element.filename,
+            type:element.type
+        })
+    })
+    // console.log(displayFiles)
+    res.send(displayFiles)
     // loop
-    res.send(display)
+   
 }
 
 const displayFileDownload = async (req, res) => {

@@ -34,7 +34,7 @@ const editPrimaryInformation = async (req, res) => {
 }
 
 const editStudentPersonalInformation = async (req, res) => {
-    const existAccountID = await personalInformation.findOne({where: { studentID: req.body.studentid } })
+    let existAccountID = ''
     if (!existAccountID) {
         personalInformation.create({
             studentID: req.body.studentid,
@@ -74,7 +74,7 @@ const editStudentPersonalInformation = async (req, res) => {
 }
 
 const editStudentEducation = async (req, res) => {
-    const existAccountID = await StudentEducation.findOne({where: { studentID: req.body.studentid } })
+    let existAccountID = ''
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
@@ -110,7 +110,7 @@ const editStudentEducation = async (req, res) => {
 }
 
 const editWorkExprience = async (req, res) => {
-    const existAccountID = await WorkExprience.findOne({where: { studentID: req.body.studentid } })
+    let existAccountID = ''
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
@@ -146,7 +146,7 @@ const editWorkExprience = async (req, res) => {
 
 
 const editSkills = async (req, res) => {
-    const existAccountID = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+    let existAccountID = ''
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
@@ -178,7 +178,7 @@ const editSkills = async (req, res) => {
 }
 
 const editHobby = async (req, res) => {
-    const existAccountID = await skillsHobby.findOne({where: { studentID: req.body.studentid } })
+    let existAccountID = ''
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
