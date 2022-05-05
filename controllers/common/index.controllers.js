@@ -43,13 +43,18 @@ const logOut = (req, res) => {
 }
 
 const deleteFile = async (req, res) => {
-    fs.unlinkSync(`./uploads/${req.body.filename}`);
-    const delFile = await resources.destroy({
-        where: {
-            id: req.body.id
-        }
-    })
-    res.sendStatus(200).send(delFile)
+    try {
+        fs.unlinkSync(`${process.cwd()}/uploads/${req.body.filename}`);
+        const delFile = await resources.destroy({
+            where: {
+                id: req.body.id
+            }
+        })
+        res.sendStatus(200).send(delFile)
+    } catch (error) {
+        res.send("invalid")
+    }
+
 }
 
 const displayFileDetails = (req, res) => {
