@@ -231,7 +231,7 @@ const displayPersonalInformation = (req, res) => {
 }
 
 const displayStudentEducation = async (req, res) => {
-    StudentEducation.findOne({
+    StudentEducation.findAll({
         where: {
             studentid: req.body.studentid
         }
@@ -246,7 +246,7 @@ const displayStudentEducation = async (req, res) => {
 }
 
 const displayWorkExprience = (req, res) => {
-    WorkExprience.findOne({
+    WorkExprience.findAll({
         where: {
             studentid: req.body.studentid
         }
@@ -276,7 +276,7 @@ const displayPrimaryInformation = (req, res) => {
 }
 
 const displayskillsHobby =  (req, res) => {
-    skillsHobby.findOne({
+    skillsHobby.findAll({
         where: {
             studentid: req.body.studentid
         }
