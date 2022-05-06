@@ -35,7 +35,7 @@ const editPrimaryInformation = async (req, res) => {
 
 const editStudentPersonalInformation = async (req, res) => {
     let existAccountID = ''
-    if (!existAccountID) {
+    if (existAccountID) {
         personalInformation.create({
             studentID: req.body.studentid,
             Nationality: req.body.Nationality,
@@ -78,7 +78,7 @@ const editStudentEducation = async (req, res) => {
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
-    if (!existAccountID) {
+    if (existAccountID) {
         StudentEducation.create({
             studentID: req.body.studentid,
             school: req.body.school,
@@ -114,7 +114,7 @@ const editWorkExprience = async (req, res) => {
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
-    if (!existAccountID) {
+    if (existAccountID) {
         WorkExprience.create({
             position: req.body.position,
             company: req.body.company,
@@ -150,7 +150,7 @@ const editSkills = async (req, res) => {
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
-    if (!existAccountID) {
+    if (existAccountID) {
         skillsHobby.create({
             skills: req.body.skills,
             specialty: req.body.specialty
@@ -182,7 +182,7 @@ const editHobby = async (req, res) => {
     if (req.body.create = "new") {
         existAccountID = 'new'
     }
-    if (!existAccountID) {
+    if (existAccountID) {
         skillsHobby.create({
             hobby: req.body.hobby
         })
