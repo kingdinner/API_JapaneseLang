@@ -81,15 +81,24 @@ const displayAllFile = async (req, res) => {
             userID:element.userID,
             taskID:element.taskID,
             uploaded:element.updatedAt,
-            // name: `${name.firstname} ${name.lastname}`,
             filename:element.filename,
             type:element.type
         })
     })
-    // console.log(displayFiles)
     res.send(displayFiles)
-    // loop
    
+}
+
+const displayName = async(req, res) => {
+    const names = []
+    const datas = await User.findAll()
+    // .then(name => {
+    datas.forEach(element => {
+        names.push({ [element.userid]: `${element.firstname}${element.lastname}` })
+    });
+    
+    // })
+    res.send(names)
 }
 
 const displayFileDownload = async (req, res) => {
@@ -103,5 +112,6 @@ module.exports = {
     deleteFile,
     displayFileDetails,
     displayFileDownload,
-    logOut
+    logOut,
+    displayName
 }

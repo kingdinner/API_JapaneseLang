@@ -32,6 +32,11 @@ module.exports = function(app) {
     commonController.displayFileDownload
   )
 
+  app.get(
+    "/api/common/displayName",
+    commonController.displayName
+  )
+
   app.post(
     "/api/common/deleteFile",
     commonController.deleteFile
