@@ -127,7 +127,7 @@ const displayTask = async (req, res) => {
   const counts = studentID.reduce((acc, value) => ({
     ...acc,
     [value]: (acc[value] || 0) + 1
-  }), {});
+  }), "");
 
   for (let [key, value] of Object.entries(counts)) {
     const studentName = await User.findOne({
@@ -145,7 +145,6 @@ const displayTask = async (req, res) => {
       })
     }
   }
-
   const studentLists = await User.findAll({
     where: {
       [Sequelize.Op.not]:{userid:Object.keys(counts)}
@@ -159,6 +158,18 @@ const displayTask = async (req, res) => {
       accountType: dataNumber.accounttype,
       value: 0
     })
+  }
+  if (!counts) {
+    const studentLists = await User.findAll()
+    for (let index = 0; index < studentLists.length; index++) {
+      const dataNumber = studentLists[index]
+      studentList.push({
+        id: dataNumber.userid,
+        name: `${dataNumber.firstname} ${dataNumber.lastname}`,
+        accountType: dataNumber.accounttype,
+        value: 0
+      })
+    }
   }
 
   res.send(studentList)
