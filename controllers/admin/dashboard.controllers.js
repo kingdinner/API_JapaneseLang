@@ -84,21 +84,19 @@ const listUserBasedTypes = (req, res) => {
 }
 
 const addTask = async( req, res ) => {
-  task.create({
-    studentid: req.body.studentid,
-    taskname: req.body.taskname,
-    details: req.body.details,
-    date: req.body.date,
-    deadline: req.body.deadline
-  })
-  .then(task => {
-    res.status(200).send({task});
-  })
-  .catch((error) => {
-    console.log(error.toString());
-    res.status(400).send(error)
-  });
-  // res.send(task)
+  const reqID = req.body.studentID
+  const data = []
+  for await (const ids of reqID) {
+    data = await task.create({
+      studentid: ids,
+      taskname: req.body.taskname,
+      details: req.body.details,
+      date: req.body.date,
+      deadline: req.body.deadline
+    })
+  };
+  
+  res.status(200).send(data);
 }
 
 const singleTask = async(req, res) => {
