@@ -4,11 +4,14 @@ const studentController = require("../controllers/student/student.controllers");
 const commonController = require("../controllers/common/index.controllers");
 
 module.exports = function(app) {
-  app.use(function(req, res, next) {
-    res.header(
-      "Access-Control-Allow-Headers",
-      "x-access-token, Origin, Content-Type, Accept"
-    );
+  app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'x-www-form-urlencoded, Origin, X-Requested-With, Content-Type, Accept, Authorization, *');
+    if (req.method === 'OPTIONS'){
+        res.header('Access-Control-Allow-Methods', 'GET, PUT, POST, PATCH, DELETE, OPTIONS');
+        res.setHeader('Access-Control-Allow-Credentials', true);
+        return res.status(200).json({});
+    }
     next();
   });
   // resources file and assignment

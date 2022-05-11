@@ -84,9 +84,10 @@ const listUserBasedTypes = (req, res) => {
 }
 
 const addTask = async( req, res ) => {
-  const reqID = req.body.studentID
-  const data = []
-  for await (const ids of reqID) {
+  const reqID = JSON.parse(req.body.studentID)
+  let data = []
+  
+  for await(const ids of reqID) {
     data = await task.create({
       studentid: ids,
       taskname: req.body.taskname,
