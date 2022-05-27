@@ -38,6 +38,25 @@ const uploadFile = (req, res, next) => {
     });
 }
 
+const profilePicList = async (req, res) => {
+    let profilePic = []
+    resources.findAll({
+        where: {
+            type: "profilepic"
+        }
+    })
+    .then(user => {
+        for (const k of user) {
+            const id = k.userID
+            const key = k.filename
+            profilePic.push({ id,key})
+        }
+        res.send(profilePic)
+    })
+
+    // console.log(profilePic)
+}
+
 const logOut = (req, res) => {
     res.json({ 'success': data.success, 'message': data.message });
 }
@@ -114,5 +133,6 @@ module.exports = {
     displayFileDetails,
     displayFileDownload,
     logOut,
-    displayName
+    displayName,
+    profilePicList
 }

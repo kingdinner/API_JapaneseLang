@@ -26,6 +26,11 @@ module.exports = function(app) {
   )
 
   app.get(
+    "/api/common/profilePicList",
+    commonController.profilePicList
+  )
+
+  app.get(
     "/api/common/displayAllFile",
     commonController.displayAllFile
   )  

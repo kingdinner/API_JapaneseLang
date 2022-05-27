@@ -35,7 +35,6 @@ app.use(express.urlencoded({ limit: '50mb', extended: true }));
 //   initial();
 // });
 
-// this for the test
 // function initial() {
 //     Role.create({
 //       id: 1,
