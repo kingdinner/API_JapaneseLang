@@ -72,7 +72,3 @@ This API provides a task system for learning the Japanese language, allowing use
 Make sure you have Node.js and MySQL installed on your system before running the setup.
 
 Feel free to modify and enhance this API according to your specific requirements.
-
-Please note that this is a sample README file, and you may need to update it with accurate information and instructions based on your actual implementation.
-
-Good luck with your project!
